@@ -1,45 +1,50 @@
-<div style="width:100%";>
-    <img src="./assets/output.gif" style="height: 180px; display: inline-block;">
-    <img src="./assets/fig1_conf.jpg" style="height: 180px; display: inline-block;">
-</div>
+<img src="./assets/output.gif">
 
-# NetTrack
+# 🏃‍♀️NetTrack 
+
+[[`Project`](https://george-zhuang.github.io/nettrack/)] [[`Paper`]()] [[`Demo`](https://www.youtube.com/watch?v=h81R1B8HuOE)] [[`Dataset (Google)`](https://drive.google.com/drive/folders/140mPnOVZY-2apH76at9yYuVGIDWOvsH_?usp=sharing)] [[`Dataset (Baidu)`](https://pan.baidu.com/s/1Ztu8-JJLFHmMkJyWrJQ8lQ?pwd=bft5)] [[`Dataset (Ali)`](https://www.alipan.com/s/NFkpgDDw6R3)]
+[Guangze Zheng^1^](https://george-zhuang.github.io/), [Shijie Lin^1^](https://scholar.google.com/citations?user=sQINQ-YAAAAJ&hl=zh-CN&oi=ao), [Haobo Zuo^1^](https://scholar.google.com/citations?user=5RhJGKgAAAAJ&hl=zh-CN&oi=ao), [Changhong Fu^2^](https://scholar.google.com/citations?user=zmbMZ4kAAAAJ&hl=zh-CN&oi=ao), [Jia Pan^1^*](https://scholar.google.com/citations?user=YYT8-7kAAAAJ&hl=zh-CN&oi=ao)
+[HKU^1^](https://www.hku.hk/), [Tongji University^2^](https://www.tongji.edu.cn/)
+PyTorch implementation for NetTrack.
+
+## 📣 News
+- [2024/03/01] 📰 NetTrack has been accepted by **CVPR 2024**.
+
 ## :hammer_and_wrench: Install 
 
-**Prerequisite**
-```bash
-conda create -n nettrack python=3.10 # please use the default version
-pip3 install torch torchvision # --index-url https://download.pytorch.org/whl/cu121
-pip3 install -r requirements.txt
-pip3 install cython; pip3 install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-pip3 install cython_bbox
-sudo apt update
-sudo apt install ffmpeg
-```
+- **Prerequisite**
+  ```bash
+  conda create -n nettrack python=3.10 # please use the default version
+  pip3 install torch torchvision # --index-url https://download.pytorch.org/whl/cu121
+  pip3 install -r requirements.txt
+  pip3 install cython; pip3 install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+  pip3 install cython_bbox
+  sudo apt update
+  sudo apt install ffmpeg
+  ```
 
-Install Grounding DINO, CoTracker, and ByteTrack:
-```bash
-pip install git+https://github.com/IDEA-Research/GroundingDINO.git
-pip install git+https://github.com/facebookresearch/co-tracker.git
-```
+  Install Grounding DINO and CoTracker:
+  ```bash
+  pip install git+https://github.com/IDEA-Research/GroundingDINO.git
+  pip install git+https://github.com/facebookresearch/co-tracker.git
+  ```
 
-**Prepare weights:**
-Download the default pretrained Grouding DINO and CoTracker model:
-```bash
-cd weights
-cd groundingdino
-wget https://huggingface.co/ShilongLiu/GroundingDINO/resolve/main/groundingdino_swinb_cogcoor.pth
-cd ..
-mkdir cotracker && cd cotracker
-wget https://dl.fbaipublicfiles.com/cotracker/cotracker_stride_4_wind_8.pth
-cd ..
-```
+- **Prepare weights:**
+  Download the default pretrained Grouding DINO and CoTracker model:
+  ```bash
+  cd weights
+  cd groundingdino
+  wget https://huggingface.co/ShilongLiu/GroundingDINO/resolve/main/groundingdino_swinb_cogcoor.pth
+  cd ..
+  mkdir cotracker && cd cotracker
+  wget https://dl.fbaipublicfiles.com/cotracker/cotracker_stride_4_wind_8.pth
+  cd ..
+  ```
 
 **(Optional) Prepare BFT:**
 ```bash
 mkdir data && cd data
 mkdir bft && cd bft
-# download bft dataset from the anonymous link https://mega.nz/folder/ZqdjwSrB#m5dvU5ioCuYfR0L63xX1Hg
 cd ..
 ```
 
@@ -87,10 +92,3 @@ In this example, the second prompt is ```"black clothes"```, and the prompt is c
 ## :star: Tricks
 Tune the ```--track_thres``` in the 3rd step (tracking). 
 Lower value encourages discovering more potential objects but may introduce :warning:**unwanted** objects.
-
-## :calendar: TODO
-
-- Online inference
-  - Add code for using camera
-  - Merge detection and tracking steps
-  - Use a more lightweight model for faster inference
