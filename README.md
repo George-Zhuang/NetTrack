@@ -1,6 +1,7 @@
-<p style="text-align:left;">
-    <img src="./assets/output.gif" class="img-responsive">
-</p>
+<div style="width:100%";>
+    <img src="./assets/output.gif" style="height: 180px; display: inline-block;">
+    <img src="./assets/fig1_conf.jpg" style="height: 180px; display: inline-block;">
+</div>
 
 # NetTrack
 ## :hammer_and_wrench: Install 
