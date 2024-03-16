@@ -1,8 +1,6 @@
-<div style="text-align: center;">
-    <video width="60%" controls>
-        <source src="./assets/output_nosound_320_180.mp4" type="video/mp4">
-    </video>
-</div>
+<p style="text-align:left;">
+    <img src="./assets/output.gif" class="img-responsive">
+</p>
 
 # NetTrack
 ## :hammer_and_wrench: Install 
