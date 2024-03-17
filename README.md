@@ -4,8 +4,8 @@
 
 [[`Project`](https://george-zhuang.github.io/nettrack/)] [[`Paper`]()] [[`Demo`](https://www.youtube.com/watch?v=h81R1B8HuOE)] [[`Dataset (Google)`](https://drive.google.com/drive/folders/140mPnOVZY-2apH76at9yYuVGIDWOvsH_?usp=sharing)] [[`Dataset (Baidu)`](https://pan.baidu.com/s/1Ztu8-JJLFHmMkJyWrJQ8lQ?pwd=bft5)] [[`Dataset (Ali)`](https://www.alipan.com/s/NFkpgDDw6R3)]
 
-[Guangze Zheng$^1$](https://george-zhuang.github.io/), [Shijie Lin$^1$](https://scholar.google.com/citations?user=sQINQ-YAAAAJ&hl=zh-CN&oi=ao), [Haobo Zuo$^1$](https://scholar.google.com/citations?user=5RhJGKgAAAAJ&hl=zh-CN&oi=ao), [Changhong Fu$^2$](https://scholar.google.com/citations?user=zmbMZ4kAAAAJ&hl=zh-CN&oi=ao), [Jia Pan$^1$*](https://scholar.google.com/citations?user=YYT8-7kAAAAJ&hl=zh-CN&oi=ao)
-[HKU$^1$](https://www.hku.hk/), [Tongji University$^2$](https://www.tongji.edu.cn/)
+[Guangze Zheng¹](https://george-zhuang.github.io/), [Shijie Lin¹](https://scholar.google.com/citations?user=sQINQ-YAAAAJ&hl=zh-CN&oi=ao), [Haobo Zuo¹](https://scholar.google.com/citations?user=5RhJGKgAAAAJ&hl=zh-CN&oi=ao), [Changhong Fu²](https://scholar.google.com/citations?user=zmbMZ4kAAAAJ&hl=zh-CN&oi=ao), [Jia Pan¹*](https://scholar.google.com/citations?user=YYT8-7kAAAAJ&hl=zh-CN&oi=ao)
+[HKU¹](https://www.hku.hk/), [Tongji University²](https://www.tongji.edu.cn/)
 PyTorch implementation for NetTrack.
 
 ## 📣 News
@@ -58,7 +58,7 @@ PyTorch implementation for NetTrack.
       ```Due to policy limitations of Alipan, please run the .exe file directly to decompress data.```
 
 
-## :arrow_forward: Demo
+## 🚀 Get started
 - Run default demo video. 
   ```bash
   sh tools/demo/demo_seq.sh

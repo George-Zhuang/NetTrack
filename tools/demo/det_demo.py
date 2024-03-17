@@ -22,7 +22,7 @@ def setup_seed(seed):
      random.seed(seed)
      torch.backends.cudnn.deterministic = True
 
-def det_demo(args, text_prompt, model, seq_dir, video_name, camera):
+def det_demo(args, text_prompt, model, seq_dir, video_name):
     prompt_cat = [cat.strip() for cat in text_prompt.split('.')]
     prompt_cat_id = [i for i in range(1, len(prompt_cat)+1)]
     img_list = glob(os.path.join(seq_dir, '*.jpg'))
@@ -35,7 +35,7 @@ def det_demo(args, text_prompt, model, seq_dir, video_name, camera):
             second_prompt = args.second_prompt
     if args.max_frame is not None and len(img_list) > args.max_frame:
         img_list = img_list[:args.max_frame]
-    save_path = os.path.join(args.res_dir, video_name, camera, args.suffix)
+    save_path = os.path.join(args.res_dir, video_name, args.suffix)
     for img_path in img_list:
         os.makedirs(os.path.join(save_path, 'txt'), exist_ok=True)
         txt_path = os.path.join(save_path, 'txt', os.path.basename(img_path)[:-4]+'.txt')
@@ -91,9 +91,8 @@ if __name__ == '__main__':
     parser.add_argument('--nms_threshold', type=float, default=0.7)
     # input data
     parser.add_argument('--seq', type=str, nargs='+', default='demo', help='all or None ==> all the seqs')
-    parser.add_argument('--camera', type=str, nargs='+', default=None)
-    parser.add_argument('--seq_dir', type=str, default='./data/cloth/demo/images')
-    parser.add_argument('--text_prompt', type=str, nargs='+', default='clothes in hand')
+    parser.add_argument('--seq_dir', type=str, default='./data/demo/images')
+    parser.add_argument('--text_prompt', type=str, nargs='+', default='bird')
     parser.add_argument('--max_frame', type=int, default=1000)
     parser.add_argument('--suffix', type=str, default='')
     parser.add_argument('--prompt_mode', type=str, choices=['single', 'multi'], default='single')
@@ -116,16 +115,14 @@ if __name__ == '__main__':
         seqs = os.listdir(args.seq_dir)
         seqs.sort()
     else:
-        seqs = args.seq
-    if not isinstance(args.camera, list):
-        cameras = [args.camera]
-    else:
-        cameras = args.camera
+        if isinstance(args.seq, list):
+            seqs = args.seq
+        elif isinstance(args.seq, str):
+            seqs = [args.seq]
     for video_name in tqdm(seqs):
-        for camera in cameras:
-            seq_dir = os.path.join(args.seq_dir, video_name, camera, args.suffix)
+            seq_dir = os.path.join(args.seq_dir, video_name, args.suffix)
             print(f'Processing {seq_dir} ...')
-            det_demo(args, text_prompt, model, seq_dir, video_name, camera)
+            det_demo(args, text_prompt, model, seq_dir, video_name)
 
 
 
