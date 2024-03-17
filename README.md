@@ -72,6 +72,7 @@ PyTorch implementation for NetTrack.
 
 ## 🎞️ Video
 Watch our video on YouTube!
+
 <div class="text-left">
     <iframe width="600" height="330" src="https://www.youtube.com/embed/h81R1B8HuOE?si=6bgoNCkJUEIUjTJY"
         title="YouTube video player" frameborder="0"
