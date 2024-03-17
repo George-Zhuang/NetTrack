@@ -133,7 +133,7 @@ dmypy.json
 .pyre/
 
 # workdir
-data/
+data/demo/images
 logs/
 vis/
 tmp/
