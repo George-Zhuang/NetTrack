@@ -8,7 +8,7 @@
 
 [HKU¹](https://www.hku.hk/), [Tongji University²](https://www.tongji.edu.cn/)
 
-PyTorch implementation for NetTrack.
+PyTorch implementation for NetTrack. SOTA performance on [BFT](https://george-zhuang.github.io/nettrack/), [TAO](https://motchallenge.net/tao_download.php), [TAO-OW](https://motchallenge.net/tao_download.php), [AnmimalTrack](https://hengfan2010.github.io/projects/AnimalTrack/), and [GMOT-40](https://spritea.github.io/GMOT40/) without any training or finetuning!
 
 ## 📣 News
 - [2024/03/16] 💻 Code has been released.
@@ -73,12 +73,9 @@ PyTorch implementation for NetTrack.
 ## 🎞️ Video
 Watch our video on YouTube!
 
-<div class="text-left">
-    <iframe width="600" height="330" src="https://www.youtube.com/embed/h81R1B8HuOE?si=6bgoNCkJUEIUjTJY"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-</div>
+<a href="http://www.youtube.com/watch?v=h81R1B8HuOE">
+    <img src="./assets/youtube.jpg" alt="IMAGE ALT TEXT HERE" width="500">
+</a>
 
 ## 🥰 Acknowledgement
 The primary data of BFT dataset is from the BBC nature documentary series [Earthflight](https://www.bbc.co.uk/programmes/b018xsc1). The code is based on [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO), [CoTracker](https://github.com/facebookresearch/co-tracker), and [ByteTrack](https://github.com/ifzhang/ByteTrack). Dr. [Ming-Shan Wang](https://scholar.google.com/citations?user=bgOWPGwAAAAJ&hl=zh-CN&oi=ao) provided valuable biological suggestions for this work. The authors appreciate the great work and the contributions they made.
