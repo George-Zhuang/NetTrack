@@ -134,7 +134,10 @@ dmypy.json
 
 # workdir
 data/
-weights/
+# weights/
 logs/
 vis/
 tmp/
+
+*.pth
+

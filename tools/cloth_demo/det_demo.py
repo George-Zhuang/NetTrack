@@ -92,7 +92,7 @@ if __name__ == '__main__':
     # input data
     parser.add_argument('--seq', type=str, nargs='+', default='4', help='all or None ==> all the seqs')
     parser.add_argument('--camera', type=str, nargs='+', default='', help='left, middle, right')
-    parser.add_argument('--data_dir', type=str, default='./data/cloth/demo/images')
+    parser.add_argument('--video_dir', type=str, default='./data/cloth/demo/images')
     parser.add_argument('--text_prompt', type=str, nargs='+', default='clothes in hand')
     parser.add_argument('--max_frame', type=int, default=1000)
     parser.add_argument('--suffix', type=str, default='')
@@ -113,7 +113,7 @@ if __name__ == '__main__':
         text_prompt = args.text_prompt
     model = load_model(args.config_file, args.weights)
     if args.seq in [None, 'all', 'ALL', 'All']:
-        seqs = os.listdir(args.data_dir)
+        seqs = os.listdir(args.video_dir)
         seqs.sort()
     else:
         seqs = args.seq
@@ -123,7 +123,7 @@ if __name__ == '__main__':
         cameras = args.camera
     for video_name in tqdm(seqs):
         for camera in cameras:
-            video_dir = os.path.join(args.data_dir, video_name, camera, args.suffix)
+            video_dir = os.path.join(args.video_dir, video_name, camera, args.suffix)
             print(f'Processing {video_dir} ...')
             det_demo(args, text_prompt, model, video_dir, video_name, camera)
 

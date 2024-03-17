@@ -3,11 +3,13 @@
 # 🏃‍♀️NetTrack 
 
 [[`Project`](https://george-zhuang.github.io/nettrack/)] [[`Paper`]()] [[`Demo`](https://www.youtube.com/watch?v=h81R1B8HuOE)] [[`Dataset (Google)`](https://drive.google.com/drive/folders/140mPnOVZY-2apH76at9yYuVGIDWOvsH_?usp=sharing)] [[`Dataset (Baidu)`](https://pan.baidu.com/s/1Ztu8-JJLFHmMkJyWrJQ8lQ?pwd=bft5)] [[`Dataset (Ali)`](https://www.alipan.com/s/NFkpgDDw6R3)]
-[Guangze Zheng^1^](https://george-zhuang.github.io/), [Shijie Lin^1^](https://scholar.google.com/citations?user=sQINQ-YAAAAJ&hl=zh-CN&oi=ao), [Haobo Zuo^1^](https://scholar.google.com/citations?user=5RhJGKgAAAAJ&hl=zh-CN&oi=ao), [Changhong Fu^2^](https://scholar.google.com/citations?user=zmbMZ4kAAAAJ&hl=zh-CN&oi=ao), [Jia Pan^1^*](https://scholar.google.com/citations?user=YYT8-7kAAAAJ&hl=zh-CN&oi=ao)
-[HKU^1^](https://www.hku.hk/), [Tongji University^2^](https://www.tongji.edu.cn/)
+
+[Guangze Zheng$^1$](https://george-zhuang.github.io/), [Shijie Lin$^1$](https://scholar.google.com/citations?user=sQINQ-YAAAAJ&hl=zh-CN&oi=ao), [Haobo Zuo$^1$](https://scholar.google.com/citations?user=5RhJGKgAAAAJ&hl=zh-CN&oi=ao), [Changhong Fu$^2$](https://scholar.google.com/citations?user=zmbMZ4kAAAAJ&hl=zh-CN&oi=ao), [Jia Pan$^1$*](https://scholar.google.com/citations?user=YYT8-7kAAAAJ&hl=zh-CN&oi=ao)
+[HKU$^1$](https://www.hku.hk/), [Tongji University$^2$](https://www.tongji.edu.cn/)
 PyTorch implementation for NetTrack.
 
 ## 📣 News
+- [2024/03/16] 💻 Code has been released.
 - [2024/03/01] 📰 NetTrack has been accepted by **CVPR 2024**.
 
 ## :hammer_and_wrench: Install 
@@ -41,19 +43,27 @@ PyTorch implementation for NetTrack.
   cd ..
   ```
 
-**(Optional) Prepare BFT:**
-```bash
-mkdir data && cd data
-mkdir bft && cd bft
-cd ..
-```
+## :bird: BFT dataset
+<img src="./assets/dataset_conf.jpg" width="600">
+
+- 📊 Bird flock tracking (**BFT**) dataset:
+  - 🎬106 various bird flight videos with 22 species and 14 scenes 
+  - 🎯collected for artifical intelligence and ecological research
+  - 📈 We provide a Multiple Object Tracking (**MOT**) benchmark for evaluating open-world MOT for highly dynamic object tracking.
+  
+- 📥 Download **BFT dataset v1.5**
+  - **[Recommended]** Download with [Google Drive](https://drive.google.com/drive/folders/140mPnOVZY-2apH76at9yYuVGIDWOvsH_?usp=sharing)
+  - Download with [Baidu Pan](https://pan.baidu.com/s/1Ztu8-JJLFHmMkJyWrJQ8lQ?pwd=bft5)
+  - Download with [AliPan](https://www.alipan.com/s/NFkpgDDw6R3)
+      ```Due to policy limitations of Alipan, please run the .exe file directly to decompress data.```
+
 
 ## :arrow_forward: Demo
-Run demo with python!
-```bash
-sh tools/demo/demo_seq.sh
-```
-The results will be shown in ```./data/demo/track_res```.
+- Run default demo video. 
+  ```bash
+  sh tools/demo/demo_seq.sh
+  ```
+  The results will be shown in ```./data/demo/track_res```.
 
 # Using NetTrack for clothes tracking
 
@@ -92,3 +102,22 @@ In this example, the second prompt is ```"black clothes"```, and the prompt is c
 ## :star: Tricks
 Tune the ```--track_thres``` in the 3rd step (tracking). 
 Lower value encourages discovering more potential objects but may introduce :warning:**unwanted** objects.
+
+## 🎞️ Video
+<div class="text-left">
+    <iframe width="600" height="330" src="https://www.youtube.com/embed/h81R1B8HuOE?si=6bgoNCkJUEIUjTJY"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+</div>
+
+## 😮 Cite our work
+If you find this dataset useful, please cite our work. Looking forward to your suggestions to make this dataset better!
+```
+@Inproceedings{nettrack,
+title={{NetTrack: Tracking Highly Dynamic Objects with a Net}},
+author={Zheng, Guangze and Lin, Shijie and Zuo, Haobo and Fu, Changhong and Pan, Jia},
+booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+year={2024},
+pages={1-8}}
+```

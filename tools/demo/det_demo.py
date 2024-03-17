@@ -22,12 +22,20 @@ def setup_seed(seed):
      random.seed(seed)
      torch.backends.cudnn.deterministic = True
 
-def det_demo(args, text_prompt, model, video_dir, video_name):
+def det_demo(args, text_prompt, model, seq_dir, video_name, camera):
     prompt_cat = [cat.strip() for cat in text_prompt.split('.')]
     prompt_cat_id = [i for i in range(1, len(prompt_cat)+1)]
-    img_list = glob(os.path.join(video_dir, '*.jpg'))
+    img_list = glob(os.path.join(seq_dir, '*.jpg'))
+    # img_list = glob(os.path.join(seq_dir, '*.png'))
     img_list.sort()
-    save_path = os.path.join(args.res_dir, video_name)
+    if args.prompt_mode == 'multi':
+        if isinstance(args.second_prompt, list):
+            second_prompt = ' . '.join(args.second_prompt) + ' .'
+        else:
+            second_prompt = args.second_prompt
+    if args.max_frame is not None and len(img_list) > args.max_frame:
+        img_list = img_list[:args.max_frame]
+    save_path = os.path.join(args.res_dir, video_name, camera, args.suffix)
     for img_path in img_list:
         os.makedirs(os.path.join(save_path, 'txt'), exist_ok=True)
         txt_path = os.path.join(save_path, 'txt', os.path.basename(img_path)[:-4]+'.txt')
@@ -36,6 +44,8 @@ def det_demo(args, text_prompt, model, video_dir, video_name):
         # box [cx, cy, w, h], logit [score]
         image_source, image = load_image(img_path)
         h, w, _ = image_source.shape
+        if args.prompt_mode == 'multi' and int(os.path.basename(img_path)[:-4]) > args.second_prompt_frame:
+            text_prompt = second_prompt
         with torch.no_grad():
             boxes, logits, phrases = predict(
                 model=model,
@@ -76,33 +86,46 @@ if __name__ == '__main__':
     # model
     parser.add_argument('--config_file', type=str, default="./weights/groundingdino/GroundingDINO_SwinB_cfg.py")
     parser.add_argument('--weights', type=str, default="./weights/groundingdino/groundingdino_swinb_cogcoor.pth")
-    parser.add_argument('--box_threshold', type=float, default=0.01)
-    parser.add_argument('--text_threshold', type=float, default=0.01)
+    parser.add_argument('--box_threshold', type=float, default=0.1)
+    parser.add_argument('--text_threshold', type=float, default=0.1)
     parser.add_argument('--nms_threshold', type=float, default=0.7)
     # input data
-    parser.add_argument('--seq', type=str, default='demo', help='all or None ==> all the seqs')
-    parser.add_argument('--seq_dir', type=str, default='./data/demo/images/')
-    parser.add_argument('--text_prompt', type=str, default='bird')
+    parser.add_argument('--seq', type=str, nargs='+', default='demo', help='all or None ==> all the seqs')
+    parser.add_argument('--camera', type=str, nargs='+', default=None)
+    parser.add_argument('--seq_dir', type=str, default='./data/cloth/demo/images')
+    parser.add_argument('--text_prompt', type=str, nargs='+', default='clothes in hand')
+    parser.add_argument('--max_frame', type=int, default=1000)
+    parser.add_argument('--suffix', type=str, default='')
+    parser.add_argument('--prompt_mode', type=str, choices=['single', 'multi'], default='single')
+    parser.add_argument('--second_prompt', type=str, nargs='+', default='white clothes')
+    parser.add_argument('--second_prompt_frame', type=int, default=400)
     # output data
-    parser.add_argument('--res_dir', type=str, default="./data/demo/det_res")
+    parser.add_argument('--res_dir', type=str, default="./output/det_res")
     parser.add_argument('--save_txt', type=bool, default=True)
     parser.add_argument('--save_vis', type=bool, default=True)
     args = parser.parse_args()
     setup_seed(0)
 
-    # args.res_dir = os.path.join(args.res_dir, args.det_mode)
-    text_prompt = args.text_prompt
+    # transform text prompt
+    if isinstance(args.text_prompt, list):
+        text_prompt = ' . '.join(args.text_prompt) + ' .'
+    else:
+        text_prompt = args.text_prompt
     model = load_model(args.config_file, args.weights)
-    seqs = os.listdir(args.seq_dir)
-    seqs.sort()
     if args.seq in [None, 'all', 'ALL', 'All']:
         seqs = os.listdir(args.seq_dir)
         seqs.sort()
     else:
-        seqs = [args.seq]
+        seqs = args.seq
+    if not isinstance(args.camera, list):
+        cameras = [args.camera]
+    else:
+        cameras = args.camera
     for video_name in tqdm(seqs):
-        video_dir = os.path.join(args.seq_dir, video_name)
-        det_demo(args, text_prompt, model, video_dir, video_name)
+        for camera in cameras:
+            seq_dir = os.path.join(args.seq_dir, video_name, camera, args.suffix)
+            print(f'Processing {seq_dir} ...')
+            det_demo(args, text_prompt, model, seq_dir, video_name, camera)
 
 
 

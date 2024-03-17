@@ -22,7 +22,7 @@ def make_parser():
     parser = argparse.ArgumentParser("NetTrack Demo!")
     parser.add_argument('--exp_name', type=str, default='NetTrack_demo', help='exp name')
     # input data
-    parser.add_argument('--data_dir', type=str, default='./data/cloth/demo/images', help='file names') 
+    parser.add_argument('--seq_dir', type=str, default='./data/cloth/demo/images', help='file names') 
     parser.add_argument('--seq', type=str, nargs='+', default='4', help='all or None ==> all the seqs') 
     parser.add_argument('--camera', type=str, nargs='+', default='', help='left, middle, right')
     parser.add_argument('--det_preds', type=str, default='./output/det_res/', help='detection results')
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     ''' data '''
     # very portable data loader
     if args.seq in [None, 'all', 'ALL', 'All']:
-        seqs = os.listdir(args.data_dir)
+        seqs = os.listdir(args.seq_dir)
         seqs.sort()
     else:
         seqs = args.seq
@@ -83,7 +83,7 @@ if __name__ == "__main__":
             res_file = osp.join(args.output_path, f"{seq}_{camera}.txt")
 
             # detection and images
-            images_path = os.path.join(args.data_dir, seq, camera, args.suffix, '*.jpg')
+            images_path = os.path.join(args.seq_dir, seq, camera, args.suffix, '*.jpg')
             images = glob(images_path)
             if len(images) == 0:
                 raise Exception(f'No images, please check {images_path}')
